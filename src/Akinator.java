@@ -43,7 +43,7 @@ public class Akinator<E extends Comparable <E>> {
 		}
 		else{
 			if(dir == true){
-				if(this.node.getYes() == null){//Si ha llegado a un nodo que tiene un hijo izquierdo
+				if(this.node.getYes() == null && this.node.getNo() != null){//Si ha llegado a un nodo que tiene un hijo izquierdo
 					System.out.println("No se :( me puedes decir la respuesta?");
 					this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,1);
 				}
@@ -52,7 +52,7 @@ public class Akinator<E extends Comparable <E>> {
 				}
 			}
 			else{
-				if(this.node.getNo() == null){//Si ha llegado a un nodo que tiene un hijo derecho
+				if(this.node.getNo() == null && this.node.getYes() != null){//Si ha llegado a un nodo que tiene un hijo derecho
 					System.out.println("No se :( me puedes decir la respuesta?");
 					this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,0);
 				}
