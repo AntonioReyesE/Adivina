@@ -6,19 +6,32 @@ public class Akinator<E extends Comparable <E>> {
 
 	private DesTree<E> tree;
 	private NodoDes<E> node;
+	private boolean ganar;
 	
+
 	public Akinator(DesTree<E> root) {//se tiene que cambiar la direcci—n del file para que sea local
 		super();
 		this.tree = root;
 		this.tree.lector("/Users/antonio/Documents/Quinto semestre/Estructura de datos/Workspace 5to Semestre/Adivina/memoria");
 		this.node = root.getRoot();
+		this.ganar = false;
 	}
+
+	
+	public boolean isGanar() {
+		return ganar;
+	}
+
+
+	public void setGanar(boolean ganar) {
+		this.ganar = ganar;
+	}
+
 
 
 	public DesTree<E> getRoot() {
 		return tree;
 	}
-
 
 	public void setRoot(DesTree<E> root) {
 		this.tree = root;
@@ -46,6 +59,7 @@ public class Akinator<E extends Comparable <E>> {
 			else{
 				new JOptionPane().showMessageDialog(null, "Siii adivine :");
 			}
+			this.ganar = true;
 			return this.node.getQuestion();
 		}
 		else{
@@ -78,7 +92,7 @@ public class Akinator<E extends Comparable <E>> {
 	 */
 	public static void main(String[] args) {
 		Akinator<String> akinator = new Akinator<String>(new DesTree<String>());
-		while(true){
+		while(akinator.ganar == false){
 			boolean t;
 			//System.out.println(akinator.tree.toString());
 			if(new JOptionPane().showConfirmDialog(null, "Verdadero o falso?") == 1){
