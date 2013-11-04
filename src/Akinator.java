@@ -71,15 +71,7 @@ public class Akinator<E extends Comparable <E>> {
 	 */
 	public static void main(String[] args) {
 		Akinator<String> akinator = new Akinator<String>(new DesTree<String>());
-		//akinator.tree.lector("/Users/antonio/Documents/Quinto semestre/Estructura de datos/Workspace 5to Semestre/Adivina/memoria");
 		System.out.println(akinator.tree.toString());
-		System.out.println(akinator.ClimbDown(false));
-		System.out.println(akinator.ClimbDown(false));
-		System.out.println(akinator.ClimbDown(true));
-		//akinator.tree.addQuestion("Esta es la prueba para agregar preguntas", akinator.node);
-		System.out.println(akinator.tree.toString());
-		System.out.println(akinator.ClimbDown(false));
-		System.out.println(akinator.ClimbDown(false));
 		
 	}
 
