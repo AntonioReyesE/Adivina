@@ -8,7 +8,7 @@ public class DesTree <E extends Comparable<E>> {
 	
 	@Override
 	public String toString() {
-		return "DesTree [root=" + root.toString() + "]";
+		return  root.toString().substring(1);
 	}
 
 

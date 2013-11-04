@@ -68,7 +68,15 @@ public class NodoDes <E extends Comparable<E>> {
 
 	@Override
 	public String toString() {
-		return "NodoDes [question=" + question + ", id=" + id + ", yes=" + yes
-				+ ", no=" + no + "]";
+		if(yes == null && no == null){
+			return ","+id+"@"+question;
+		}
+		else if(yes == null && no != null){
+			return	","+id+"@"+question+no;
+		}
+		else if(yes != null && no == null){
+			return	","+id+"@"+question+yes;
+		}
+		return	","+id+"@"+question+yes+no;
 	}
 }
