@@ -151,6 +151,7 @@ public class Akinator<E extends Comparable <E>> extends JFrame implements MouseL
 			System.out.println(akinator.getTree().toString());
 			akinator.repaint();
 		}	
+		akinator.tree.save();
 	}
 
 

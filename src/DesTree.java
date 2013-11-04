@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 
@@ -79,7 +81,7 @@ public class DesTree <E extends Comparable<E>> {
 	}
 	
 	///////////---------------Construye el arbol a partir de un archivo de texto-------////
-	
+
 	public void lector(String archivo){
 		try{
 			FileReader a = new FileReader(archivo);
@@ -108,6 +110,21 @@ public class DesTree <E extends Comparable<E>> {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	//////-----------------------Escritor--------------------------------///////////////
+	public void save(){
+		try {
+			FileWriter escritor = new FileWriter("src/memoria1.txt");
+			PrintWriter salida = new PrintWriter(escritor);
+			salida.println(this.toString());
+			salida.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	////////////------------Agrega una pregunta--------------------//////////
 	public void addQuestion(String r, String q, NodoDes<E> a, int n){
