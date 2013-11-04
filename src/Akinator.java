@@ -53,20 +53,26 @@ public class Akinator<E extends Comparable <E>> {
 		if(this.node.getNo() == null && this.node.getYes() == null){//Verifica si ha llegado a una hoja
 			boolean t;
 			//System.out.println(akinator.tree.toString());
-			if(new JOptionPane().showConfirmDialog(null, "Verdadero o falso en la hoja?: "+this.node.getQuestion()) == 1){
-				this.tree.addQuestion(new JOptionPane().showInputDialog("¿cual que es la nueve respuesta?"),new JOptionPane().showInputDialog("¿cual que es la nueva pregunta?"),this.node,2);
+			if(new JOptionPane().showConfirmDialog(null, this.node.getQuestion()) == 1){
+				this.tree.addQuestion(new JOptionPane().showInputDialog("¡No se! :( ¿Cuál es el animal?"),new JOptionPane().showInputDialog("¿Cuál sería la pregunta de si/no que tendría que hacer?"),this.node,2);
+				this.ganar = true;
+				return null;
 			}
 			else{
 				new JOptionPane().showMessageDialog(null, "¡Adiviné!");
+				this.ganar = true;
+				return null;
 			}
-			this.ganar = true;
-			return this.node.getQuestion();
+			//this.ganar = true;
+			//return this.node.getQuestion();
 		}
 		else{
-			if(dir == true){
+			if(dir == true){//Si el ususario menciono que si
 				if(this.node.getYes() == null && this.node.getNo() != null){//Si ha llegado a un nodo que tiene un hijo izquierdo
 					System.out.println("¡No se! :( ¿Cuál es el animal?");
 					this.tree.addQuestion(new JOptionPane().showInputDialog("¡No se! :( ¿Cuál es el animal?"),new JOptionPane().showInputDialog("¿Cuál sería la pregunta de si/no que tendría que hacer?"),this.node,1);
+					this.ganar = true;
+					return this.node.getQuestion();
 				}
 				else{
 					this.node = this.node.getYes();
@@ -75,7 +81,9 @@ public class Akinator<E extends Comparable <E>> {
 			else{
 				if(this.node.getNo() == null && this.node.getYes() != null){//Si ha llegado a un nodo que tiene un hijo derecho
 					System.out.println("No se :( me puedes decir la respuesta?");
-					this.tree.addQuestion(new JOptionPane().showInputDialog("¿cual que es la nueve respuesta?"),new JOptionPane().showInputDialog("¿cual que es la nueva pregunta?"),this.node,0);
+					this.tree.addQuestion(new JOptionPane().showInputDialog("¡No se! :( ¿Cuál es el animal?"),new JOptionPane().showInputDialog("¿Cuál sería la pregunta de si/no que tendría que hacer?"),this.node,0);
+					this.ganar = true;
+					return this.node.getQuestion();
 				}
 				else{
 					this.node = this.node.getNo();
