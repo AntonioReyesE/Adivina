@@ -125,8 +125,10 @@ public class DesTree <E extends Comparable<E>> {
 		}
 		else{///Caso en el que el nodo sea una hoja//
 			NodoDes<E> nuevo = new NodoDes<E>(a.getQuestion(),a.getId()+"-");
+			NodoDes<E> nuevo2 = new NodoDes<E>(r,a.getId()+"+");
 			a.setQuestion(q);
 			a.setNo(nuevo);
+			a.setYes(nuevo2);
 		}
 
 	}

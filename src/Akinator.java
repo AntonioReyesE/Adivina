@@ -9,7 +9,7 @@ public class Akinator<E extends Comparable <E>> {
 	private boolean ganar;
 	
 
-	public Akinator(DesTree<E> root) {//se tiene que cambiar la direcci—n del file para que sea local
+	public Akinator(DesTree<E> root) {//se tiene que cambiar la direcciï¿½n del file para que sea local
 		super();
 		this.tree = root;
 		this.tree.lector("/Users/antonio/Documents/Quinto semestre/Estructura de datos/Workspace 5to Semestre/Adivina/memoria");
@@ -50,27 +50,25 @@ public class Akinator<E extends Comparable <E>> {
 
 	////////-------------Recorre el arbol------------------------////////////
 	public String Recorrer(boolean dir ){
-		if(this.node.getNo() == null && this.node.getYes() == null){//Verifica si ha llegado a una hoja
-			boolean t;
-			//System.out.println(akinator.tree.toString());
-			if(new JOptionPane().showConfirmDialog(null, this.node.getQuestion()) == 1){
-				this.tree.addQuestion(new JOptionPane().showInputDialog("ÁNo se! :( ÀCu‡l es el animal?"),new JOptionPane().showInputDialog("ÀCu‡l ser’a la pregunta de si/no que tendr’a que hacer?"),this.node,2);
+		if(this.node.getNo() == null && this.node.getYes() == null){   //Verifica si ha llegado a una hoja
+			System.out.println("Entre a nodo raiz");
+			if(/*new JOptionPane().showConfirmDialog(null, this.node.getQuestion()) == 1*/ dir == false){
+				System.out.println("entre al if");
+				this.tree.addQuestion(new JOptionPane().showInputDialog("ï¿½No se! :( ï¿½Cuï¿½l es el animal?"),new JOptionPane().showInputDialog("ï¿½Cuï¿½l serï¿½a la pregunta de si/no que tendrï¿½a que hacer?"),this.node,2);
 				this.ganar = true;
 				return null;
 			}
 			else{
-				new JOptionPane().showMessageDialog(null, "ÁAdivinŽ!");
+				new JOptionPane().showMessageDialog(null, "ï¿½Adivinï¿½!");
 				this.ganar = true;
 				return null;
 			}
-			//this.ganar = true;
-			//return this.node.getQuestion();
 		}
 		else{
 			if(dir == true){//Si el ususario menciono que si
 				if(this.node.getYes() == null && this.node.getNo() != null){//Si ha llegado a un nodo que tiene un hijo izquierdo
-					System.out.println("ÁNo se! :( ÀCu‡l es el animal?");
-					this.tree.addQuestion(new JOptionPane().showInputDialog("ÁNo se! :( ÀCu‡l es el animal?"),new JOptionPane().showInputDialog("ÀCu‡l ser’a la pregunta de si/no que tendr’a que hacer?"),this.node,1);
+					System.out.println("ï¿½No se! :( ï¿½Cuï¿½l es el animal?");
+					this.tree.addQuestion(new JOptionPane().showInputDialog("ï¿½No se! :( ï¿½Cuï¿½l es el animal?"),new JOptionPane().showInputDialog("ï¿½Cuï¿½l serï¿½a la pregunta de si/no que tendrï¿½a que hacer?"),this.node,1);
 					this.ganar = true;
 					return this.node.getQuestion();
 				}
@@ -81,7 +79,7 @@ public class Akinator<E extends Comparable <E>> {
 			else{
 				if(this.node.getNo() == null && this.node.getYes() != null){//Si ha llegado a un nodo que tiene un hijo derecho
 					System.out.println("No se :( me puedes decir la respuesta?");
-					this.tree.addQuestion(new JOptionPane().showInputDialog("ÁNo se! :( ÀCu‡l es el animal?"),new JOptionPane().showInputDialog("ÀCu‡l ser’a la pregunta de si/no que tendr’a que hacer?"),this.node,0);
+					this.tree.addQuestion(new JOptionPane().showInputDialog("ï¿½No se! :( ï¿½Cuï¿½l es el animal?"),new JOptionPane().showInputDialog("ï¿½Cuï¿½l serï¿½a la pregunta de si/no que tendrï¿½a que hacer?"),this.node,0);
 					this.ganar = true;
 					return this.node.getQuestion();
 				}
@@ -101,15 +99,12 @@ public class Akinator<E extends Comparable <E>> {
 	public static void main(String[] args) {
 		Akinator<String> akinator = new Akinator<String>(new DesTree<String>());
 		while(akinator.ganar == false){
-			boolean t;
-			//System.out.println(akinator.tree.toString());
 			if(new JOptionPane().showConfirmDialog(null, akinator.node.getQuestion()) == 1){
-				t = false;
+				System.out.println(akinator.Recorrer(false));
 			}
 			else{
-				t = true;
+				System.out.println(akinator.Recorrer(true));
 			}
-			System.out.println(akinator.Recorrer(t));
 			System.out.println(akinator.tree.toString());
 		}	
 	}
