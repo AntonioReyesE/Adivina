@@ -36,8 +36,8 @@ public class Akinator<E extends Comparable <E>> {
 
 
 	////////-------------Recorre el arbol------------------------////////////
-	public String ClimbDown(boolean dir ){
-		if(this.node.getNo() == null && this.node == null){//Verifica si ha llegado a una hoja
+	public String Recorrer(boolean dir ){
+		if(this.node.getNo() == null && this.node.getYes() == null){//Verifica si ha llegado a una hoja
 			this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,2);
 			return this.node.getQuestion();
 		}
@@ -71,8 +71,16 @@ public class Akinator<E extends Comparable <E>> {
 	 */
 	public static void main(String[] args) {
 		Akinator<String> akinator = new Akinator<String>(new DesTree<String>());
-		System.out.println(akinator.tree.toString());
-		
+		while(true){
+			boolean t;
+			System.out.println(akinator.tree.toString());
+			if(new JOptionPane().showConfirmDialog(null, "hola") == 1){
+				t = false;
+			}
+			else{
+				t = true;
+			}
+			System.out.println(akinator.Recorrer(t));
+		}	
 	}
-
 }
