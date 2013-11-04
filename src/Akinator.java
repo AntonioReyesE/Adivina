@@ -38,7 +38,14 @@ public class Akinator<E extends Comparable <E>> {
 	////////-------------Recorre el arbol------------------------////////////
 	public String Recorrer(boolean dir ){
 		if(this.node.getNo() == null && this.node.getYes() == null){//Verifica si ha llegado a una hoja
-			this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,2);
+			boolean t;
+			//System.out.println(akinator.tree.toString());
+			if(new JOptionPane().showConfirmDialog(null, "Verdadero o falso en la hoja?: "+this.node.getQuestion()) == 1){
+				this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,2);
+			}
+			else{
+				new JOptionPane().showMessageDialog(null, "Siii adivine :");
+			}
 			return this.node.getQuestion();
 		}
 		else{
@@ -73,14 +80,15 @@ public class Akinator<E extends Comparable <E>> {
 		Akinator<String> akinator = new Akinator<String>(new DesTree<String>());
 		while(true){
 			boolean t;
-			System.out.println(akinator.tree.toString());
-			if(new JOptionPane().showConfirmDialog(null, "hola") == 1){
+			//System.out.println(akinator.tree.toString());
+			if(new JOptionPane().showConfirmDialog(null, "Verdadero o falso?") == 1){
 				t = false;
 			}
 			else{
 				t = true;
 			}
 			System.out.println(akinator.Recorrer(t));
+			System.out.println(akinator.tree.toString());
 		}	
 	}
 }
