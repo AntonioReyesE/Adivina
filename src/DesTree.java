@@ -110,9 +110,24 @@ public class DesTree <E extends Comparable<E>> {
 	}
 	
 	////////////------------Agrega una pregunta--------------------//////////
-	public void addQuestion(String q, NodoDes<E> a){
-		NodoDes<E> nuevo = new NodoDes<E>(a.getQuestion(),a.getId()+"-");
-		a.setQuestion(q);
-		a.setNo(nuevo);
+	public void addQuestion(String r, String q, NodoDes<E> a, int n){
+		if(n == 0){///Caso en el que no tiene hoja izquierda
+			NodoDes<E> nuevo = new NodoDes<E>(a.getQuestion(),a.getId()+"-");
+			NodoDes<E> nuevo2 = new NodoDes<E>(r,nuevo.getId()+"+");
+			nuevo.setYes(nuevo2);
+			a.setNo(nuevo);
+		}
+		else if(n == 1){///Caso en el que no tiene hoja derecha
+			NodoDes<E> nuevo = new NodoDes<E>(a.getQuestion(),a.getId()+"+");
+			NodoDes<E> nuevo2 = new NodoDes<E>(r,nuevo.getId()+"+");
+			nuevo.setYes(nuevo2);
+			a.setNo(nuevo);
+		}
+		else{///Caso en el que el nodo sea una hoja//
+			NodoDes<E> nuevo = new NodoDes<E>(a.getQuestion(),a.getId()+"-");
+			a.setQuestion(q);
+			a.setNo(nuevo);
+		}
+
 	}
 }

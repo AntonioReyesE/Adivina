@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 
 public class Akinator<E extends Comparable <E>> {
 	
@@ -35,15 +37,31 @@ public class Akinator<E extends Comparable <E>> {
 
 	////////-------------Recorre el arbol------------------------////////////
 	public String ClimbDown(boolean dir ){
+		if(this.node.getNo() == null && this.node == null){
+			this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,2);
+			return this.node.getQuestion();
+		}
 		if(dir == true){
-			this.node = this.node.getYes();
+			if(this.node.getYes() == null){
+				System.out.println("No se :( me puedes decir la respuesta?");
+				this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,1);
+			}
+			else{
+				this.node = this.node.getYes();
+			}
 		}
 		else{
-			this.node = this.node.getNo();
+			if(this.node.getNo() == null){
+				System.out.println("No se :( me puedes decir la respuesta?");
+				this.tree.addQuestion(new JOptionPane().showInputDialog("Àcual que es la nueve respuesta?"),new JOptionPane().showInputDialog("Àcual que es la nueva pregunta?"),this.node,0);
+			}
+			else{
+				this.node = this.node.getNo();
+			}
 		}
 		return this.node.getQuestion();
 	}
-	
+
 
 	/**
 	 * @param args
@@ -55,9 +73,11 @@ public class Akinator<E extends Comparable <E>> {
 		System.out.println(akinator.ClimbDown(false));
 		System.out.println(akinator.ClimbDown(false));
 		System.out.println(akinator.ClimbDown(true));
-		akinator.tree.addQuestion("Esta es la prueba para agregar preguntas", akinator.node);
+		//akinator.tree.addQuestion("Esta es la prueba para agregar preguntas", akinator.node);
 		System.out.println(akinator.tree.toString());
 		System.out.println(akinator.ClimbDown(false));
+		System.out.println(akinator.ClimbDown(false));
+		
 	}
 
 }
