@@ -57,7 +57,7 @@ public class Akinator<E extends Comparable <E>> {
 				this.tree.addQuestion(new JOptionPane().showInputDialog("¿cual que es la nueve respuesta?"),new JOptionPane().showInputDialog("¿cual que es la nueva pregunta?"),this.node,2);
 			}
 			else{
-				new JOptionPane().showMessageDialog(null, "Siii adivine :");
+				new JOptionPane().showMessageDialog(null, "¡Adiviné!");
 			}
 			this.ganar = true;
 			return this.node.getQuestion();
@@ -65,8 +65,8 @@ public class Akinator<E extends Comparable <E>> {
 		else{
 			if(dir == true){
 				if(this.node.getYes() == null && this.node.getNo() != null){//Si ha llegado a un nodo que tiene un hijo izquierdo
-					System.out.println("No se :( me puedes decir la respuesta?");
-					this.tree.addQuestion(new JOptionPane().showInputDialog("¿cual que es la nueve respuesta?"),new JOptionPane().showInputDialog("¿cual que es la nueva pregunta?"),this.node,1);
+					System.out.println("¡No se! :( ¿Cuál es el animal?");
+					this.tree.addQuestion(new JOptionPane().showInputDialog("¡No se! :( ¿Cuál es el animal?"),new JOptionPane().showInputDialog("¿Cuál sería la pregunta de si/no que tendría que hacer?"),this.node,1);
 				}
 				else{
 					this.node = this.node.getYes();
@@ -95,7 +95,7 @@ public class Akinator<E extends Comparable <E>> {
 		while(akinator.ganar == false){
 			boolean t;
 			//System.out.println(akinator.tree.toString());
-			if(new JOptionPane().showConfirmDialog(null, "Verdadero o falso?") == 1){
+			if(new JOptionPane().showConfirmDialog(null, akinator.node.getQuestion()) == 1){
 				t = false;
 			}
 			else{
