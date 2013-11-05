@@ -99,8 +99,6 @@ public class DesTree <E extends Comparable<E>> {
 						camino = st2.nextToken();
 						ref = st2.nextToken();
 						this.insertD(ref, camino);
-						//System.out.println(ref);
-						//System.out.println(camino);
 					}
 				}
 			}
@@ -115,7 +113,7 @@ public class DesTree <E extends Comparable<E>> {
 	//////-----------------------Escritor--------------------------------///////////////
 	public void save(){
 		try {
-			FileWriter escritor = new FileWriter("src/memoria1.txt");
+			FileWriter escritor = new FileWriter("src/memoria.txt");
 			PrintWriter salida = new PrintWriter(escritor);
 			salida.println(this.toString());
 			salida.close();

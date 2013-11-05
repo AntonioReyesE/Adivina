@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 public class Akinator<E extends Comparable <E>> extends JFrame implements ActionListener {
@@ -16,14 +17,14 @@ public class Akinator<E extends Comparable <E>> extends JFrame implements Action
 	private DesTree<E> tree;
 	private NodoDes<E> node;
 	private boolean ganar;
-	private Image genio, feliz, triste, dialogo,fondo;
-	private JButton si, no, cancelar;
+	private Image genio, dialogo,fondo;
+	private JButton si, no, salir;
 	
 
 	public Akinator(DesTree<E> root) {//se tiene que cambiar la direcci�n del file para que sea local
 		super();
 		this.setTree(root);
-		this.getTree().lector("src/memoria");
+		this.getTree().lector("src/memoria.txt");
 		this.node = root.getRoot();
 		this.ganar = false;
 		/////-----Grafico------////
@@ -40,18 +41,20 @@ public class Akinator<E extends Comparable <E>> extends JFrame implements Action
 		/////-------Botones--------/////
 		this.si = new JButton("SI");
 		this.no = new JButton("NO");
-		this.cancelar = new JButton("CANCELAR");
-		this.si.setBounds(100, 100, 90, 20);
-		this.cancelar.setBounds(100, 200, 150, 30);
-		this.no.setBounds(100, 300, 150, 30);
-		this.getContentPane().add(this.si);
-		this.getContentPane().add(this.cancelar);
-		this.getContentPane().add(this.no);
+		this.salir = new JButton("SALIR");
+		this.si.setBounds(0, this.getHeight() - 82, 240, 60);
+		this.no.setBounds(240, this.getHeight() - 82, 240, 60);
+		this.salir.setBounds(480, this.getHeight() - 82, 220, 60);
+		this.add(this.no);
+		this.add(this.si);
+		this.add(this.salir);
 		this.no.addActionListener(this);
 		this.si.addActionListener(this);
+		this.salir.addActionListener(this);
 		this.no.setVisible(true);
 		this.si.setVisible(true);
-		this.cancelar.setVisible(true);
+		this.salir.setVisible(true);
+
 	}
 	
 	public boolean isGanar() {
@@ -129,15 +132,13 @@ public class Akinator<E extends Comparable <E>> extends JFrame implements Action
 	
 	public void paint(Graphics g){
 		super.paint(g);
-		this.setBackground(Color.WHITE);
-        Font fuente = new Font("Monospaced", Font.BOLD, 15);
-        g.setFont(fuente);
+		this.setBackground(Color.DARK_GRAY);
+		Font fuente = new Font("Monospaced", Font.BOLD, 15);
+		g.setFont(fuente);
 		g.setColor(Color.BLUE);
-		g.drawImage(this.fondo, 0, 0, this.getWidth(), this.getHeight(), null);
+		g.drawImage(this.fondo, 0, 0, this.getWidth(), this.getHeight() -60, null);
 		g.drawImage(this.genio, 250, 130,400,500, null);
-		g.drawImage(this.dialogo, 120, 20,300,300, null);
-		//g.drawString(this.node.getQuestion(), 135, 120);
-		//this.drawMessage(this.node.getQuestion(), g);		
+		g.drawImage(this.dialogo, 120, 20,300,300, null);	
 		this.DrawMessage(g);
 	}
 	
@@ -148,7 +149,7 @@ public class Akinator<E extends Comparable <E>> extends JFrame implements Action
 		int z = this.node.getQuestion().length();
 		for(int i = 0; i < this.node.getQuestion().length(); i++){
 				g.drawString(this.node.getQuestion().substring(w, i), 160, y);
-				if(i > k){
+				if(i >= k){
 					y += 14;
 					k += 20;
 					w += 20;
@@ -161,19 +162,19 @@ public class Akinator<E extends Comparable <E>> extends JFrame implements Action
 	 */
 	public static void main(String[] args) {
 		Akinator<String> akinator = new Akinator<String>(new DesTree<String>());
-		akinator.repaint();
-//		while(akinator.ganar == false){
-//			if(new JOptionPane("Akinator 1.0").showConfirmDialog(null, akinator.node.getQuestion()) == 1){
-//				System.out.println(akinator.Recorrer(false));
-//			}
-//			else{
-//				System.out.println(akinator.Recorrer(true));
-//			}
-//			System.out.println(akinator.getTree().toString());
-//			akinator.repaint();
-//		}	
-		if(akinator.ganar == true){
-			akinator.tree.save();
+		boolean bandera = false;
+		while(bandera == false){
+			System.out.println("a");
+			if(akinator.ganar == true){
+				akinator.tree.save();
+				System.out.println("b");
+				if(new JOptionPane("Deseas volver a jugar?").showConfirmDialog(null, "Desea volver a jugar?") == 0){
+					akinator = new Akinator<String>(new DesTree<String>());	
+				}
+				else{
+					bandera = true;
+				}
+			}
 		}
 	}
 
@@ -197,9 +198,9 @@ public class Akinator<E extends Comparable <E>> extends JFrame implements Action
 			this.Recorrer(true);
 			this.repaint();
 		}
-		else if(e.getSource() == this.cancelar){
+		else if(e.getSource() == this.salir){
+			this.ganar = true;
 			System.exit(0);
 		}
-		
 	}
 }
